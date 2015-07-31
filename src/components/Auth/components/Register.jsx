@@ -3,6 +3,10 @@ import Header from '../../Common/Header'
 import Footer from '../../Common/Footer'
 
 export default class Register extends Component {
+  componentDidMount () {
+    document.title = "Signup | My App"
+  }
+
   render() {
     return (
       <div>
@@ -15,12 +19,12 @@ export default class Register extends Component {
               </div>
               <form role="form">
                 <div className="form-group">
-                  <label htmlFor="company">Company</label>
-                  <input type="text" className="form-control" ref="email" placeholder="Your company" />
-                </div>
-                <div className="form-group">
                   <label htmlFor="name">Name</label>
                   <input type="text" className="form-control" ref="email" placeholder="Your name" />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="company">Company</label>
+                  <input type="text" className="form-control" ref="email" placeholder="Your company" />
                 </div>
                 <div className="form-group">
                   <label htmlFor="email">Email</label>

@@ -10,6 +10,8 @@ let rootRoute = {
   //indexRoute: require('./components/Home'),
 
   childRoutes: [
+    {path: '/about', component: require('./components/About')},
+    {path: '/contact', component: require('./components/Contact')},
     require('./components/Auth'),
     require('./components/Admin'),
     require('./components/Profile'),

@@ -3,6 +3,10 @@ import Header from '../../Common/Header'
 import Footer from '../../Common/Footer'
 
 export default class Login extends Component {
+  componentDidMount () {
+    document.title = "Login | My App"
+  }
+
   render() {
     return (
       <div>

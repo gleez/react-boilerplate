@@ -4,6 +4,10 @@ import Footer from '../../Common/Footer'
 import '../../../less/main'
 
 export default class Profile extends Component {
+  componentDidMount () {
+    document.title = "Profile | My App"
+  }
+
   render () {
     return (
       <div>

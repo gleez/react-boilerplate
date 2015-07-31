@@ -19,14 +19,13 @@ export default class Header extends Component {
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
             </button>
-            <Link to="/" className="navbar-brand"><i className="fa fa-thumbs-o-up"></i> My App</Link>
+            <Link to="/" className="navbar-brand">My App</Link>
           </div>
           <div className="collapse navbar-collapse" id="navbar">
             <ul className="nav navbar-nav">
               <li><Link to="/">Home</Link></li>
-              <li><Link to="/admin">Admin</Link></li>
-              <li><a href="#">About</a></li>
-              <li><a href="#">Contact</a></li>
+              <li><Link to="/about">About</Link></li>
+              <li><Link to="/contact">Contact</Link></li>
             </ul>
             <ul className="nav navbar-nav navbar-right">
               <li><Link to="/profile">Profile</Link></li>
