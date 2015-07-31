@@ -1,9 +1,20 @@
-import React, { Component } from 'react'
+import React from 'react'
+import LinkedStateMixin from 'react-addons-linked-state-mixin'
+import ReactMixin from 'react-mixin'
 import Header from './Common/Header'
 import Footer from './Common/Footer'
 import '../less/main'
 
-export default class Contact extends Component {
+export default class Contact extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      name: '',
+      email: '',
+      message: ''
+    }
+  }
+
   componentDidMount () {
     document.title = "Contact | My App"
   }
@@ -21,15 +32,15 @@ export default class Contact extends Component {
               <form role="form">
                 <div className="form-group">
                   <label htmlFor="name">Your Name</label>
-                  <input type="text" className="form-control" ref="email" placeholder="Your name" />
+                  <input type="text" valueLink={this.linkState('name')} className="form-control" ref="name" placeholder="Your name" required />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="email">Email</label>
-                  <input type="text" className="form-control" ref="email" placeholder="Your email" />
+                  <label htmlFor="email">Your Email</label>
+                  <input type="text" valueLink={this.linkState('email')} className="form-control" ref="email" placeholder="Your email" required />
                 </div>
                 <div className="form-group">
                   <label htmlFor="message">Your Message</label>
-                  <textarea type="text" className="form-control" ref="message" rows="5" placeholder="Your message" />
+                  <textarea type="text" valueLink={this.linkState('message')} className="form-control" ref="message" rows="5" placeholder="Your message" required />
                 </div>
                 <button type="submit" className="btn btn-primary">Send Message</button>
               </form>
@@ -48,3 +59,4 @@ export default class Contact extends Component {
     )
   }
 }
+ReactMixin(Contact.prototype, LinkedStateMixin)

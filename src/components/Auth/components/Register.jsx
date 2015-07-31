@@ -1,8 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react';
+import LinkedStateMixin from 'react-addons-linked-state-mixin'
+import ReactMixin from 'react-mixin'
 import Header from '../../Common/Header'
 import Footer from '../../Common/Footer'
 
-export default class Register extends Component {
+export default class Register extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      name: '',
+      company: '',
+      email: '',
+      password: ''
+    }
+  }
+
   componentDidMount () {
     document.title = "Signup | My App"
   }
@@ -20,19 +32,19 @@ export default class Register extends Component {
               <form role="form">
                 <div className="form-group">
                   <label htmlFor="name">Name</label>
-                  <input type="text" className="form-control" ref="email" placeholder="Your name" />
+                  <input type="text"  valueLink={this.linkState('name')} className="form-control" ref="email" placeholder="Your name" />
                 </div>
                 <div className="form-group">
                   <label htmlFor="company">Company</label>
-                  <input type="text" className="form-control" ref="email" placeholder="Your company" />
+                  <input type="text"  valueLink={this.linkState('company')} className="form-control" ref="email" placeholder="Your company" />
                 </div>
                 <div className="form-group">
                   <label htmlFor="email">Email</label>
-                  <input type="text" className="form-control" ref="email" placeholder="Enter email" />
+                  <input type="text"  valueLink={this.linkState('email')} className="form-control" ref="email" placeholder="Enter email" />
                 </div>
                 <div className="form-group">
                   <label htmlFor="password">Password</label>
-                  <input type="password" className="form-control" ref="password" placeholder="Password" />
+                  <input type="password"  valueLink={this.linkState('password')} className="form-control" ref="password" placeholder="Password" />
                 </div>
                 <button type="submit" className="btn btn-primary btn-lg">Sign up</button>
               </form>
@@ -44,3 +56,5 @@ export default class Register extends Component {
     )
   }
 }
+
+ReactMixin(Register.prototype, LinkedStateMixin)
