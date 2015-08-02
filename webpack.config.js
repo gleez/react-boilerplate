@@ -1,6 +1,5 @@
 var path = require('path');
 var webpack = require('webpack');
-var node_modules = path.resolve(__dirname, 'node_modules');
 
 module.exports = {
   devtool: 'eval',
@@ -21,10 +20,20 @@ module.exports = {
   ],
   resolve: {
     extensions: ['', '.js', '.jsx', '.less', '.css'],
+    alias: {
+      //'formsy-react': path.join(__dirname, 'node_modules/formsy-react/release/formsy-react.js'),
+      //'formsy-react': path.join(__dirname, 'src/lib/main.js'),
+      //'formsy': path.join(__dirname, 'node_modules/formsy-react/release/formsy-react.js'),
+    }
   },
   module: {
+    preLoaders: [{
+      test: /\.js$/,
+      loaders: ['react-hot', 'babel'],
+      include: [path.resolve(__dirname, "node_modules/formsy-react")]
+    }],
     loaders: [{
-      test: /\.jsx?$/,
+      test: /\.(js|jsx)?$/,
       loaders: ['react-hot', 'babel'],
       include: path.join(__dirname, 'src')
       },

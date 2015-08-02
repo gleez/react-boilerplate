@@ -1,22 +1,41 @@
-import React from 'react';
+import React from 'react'
 import LinkedStateMixin from 'react-addons-linked-state-mixin'
 import ReactMixin from 'react-mixin'
 import Header from '../../Common/Header'
 import Footer from '../../Common/Footer'
+import Formsy from 'formsy-react'
+import TextInput from '../../Form/TextInput'
 
 export default class Register extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       name: '',
       company: '',
       email: '',
-      password: ''
+      password: '',
+      canSubmit: false
     }
   }
 
   componentDidMount () {
     document.title = "Signup | My App"
+    //this.refs.name.refs.inputField.focus()
+  }
+
+  enableButton() {
+    this.setState({
+      canSubmit: true
+    })
+  }
+
+  disableButton() {
+    this.setState({
+      canSubmit: false
+    })
+  }
+
+  submit(model) {
   }
 
   render() {
@@ -29,25 +48,49 @@ export default class Register extends React.Component {
               <div className="page-header">
                 <h1>Register</h1>
               </div>
-              <form role="form">
-                <div className="form-group">
-                  <label htmlFor="name">Name</label>
-                  <input type="text"  valueLink={this.linkState('name')} className="form-control" ref="email" placeholder="Your name" />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="company">Company</label>
-                  <input type="text"  valueLink={this.linkState('company')} className="form-control" ref="email" placeholder="Your company" />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="email">Email</label>
-                  <input type="text"  valueLink={this.linkState('email')} className="form-control" ref="email" placeholder="Enter email" />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="password">Password</label>
-                  <input type="password"  valueLink={this.linkState('password')} className="form-control" ref="password" placeholder="Password" />
-                </div>
-                <button type="submit" className="btn btn-primary btn-lg">Sign up</button>
-              </form>
+              <Formsy.Form onValidSubmit={this.submit} onValid={this.enableButton.bind(this)} onInvalid={this.disableButton.bind(this)}>
+                <TextInput
+                  name="name"
+                  label="Full Name"
+                  type="text"
+                  placeholder = "Your Name"
+                  validations="isWords"
+                  validationError="This is not a valid name"
+                  required
+                />
+                <TextInput
+                  name="company"
+                  label="Company"
+                  type="text"
+                  placeholder = "Your Company"
+                  validations="isWords"
+                  validationError="This is not a valid company"
+                  required
+                />
+                <TextInput
+                  name="email"
+                  label="Email"
+                  type="text"
+                  placeholder = "Your Email"
+                  validations={{
+                    isEmail: true,
+                    maxLength: 50
+                  }}
+                  validationErrors={{
+                    isEmail: 'You have to type valid email',
+                    maxLength: 'You can not type in more than 50 characters'
+                  }}
+                  required
+                />
+                <TextInput
+                  name="password"
+                  label="Password"
+                  type="password"
+                  placeholder="Your Password"
+                  required
+                />
+              <button type="submit" disabled={!this.state.canSubmit} className="btn btn-primary" >Submit</button>
+              </Formsy.Form>
             </div>
           </div>
         </div>

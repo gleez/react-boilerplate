@@ -1,22 +1,14 @@
-import { EventEmitter } from 'events';
-import AppDispatcher from '../dispatchers/AppDispatcher';
+import { EventEmitter } from 'events'
+import AppDispatcher from '../dispatchers/AppDispatcher'
 
 export default class BaseStore extends EventEmitter {
 
   constructor() {
-    super();
-  }
-
-  subscribe(actionSubscribe) {
-    this._dispatchToken = AppDispatcher.register(actionSubscribe());
-  }
-
-  get dispatchToken() {
-    return this._dispatchToken;
+    super()
   }
 
   emitChange() {
-    this.emit('CHANGE');
+    this.emit('CHANGE')
   }
 
   addChangeListener(cb) {
@@ -24,6 +16,6 @@ export default class BaseStore extends EventEmitter {
   }
 
   removeChangeListener(cb) {
-    this.removeListener('CHANGE', cb);
+    this.removeListener('CHANGE', cb)
   }
 }
