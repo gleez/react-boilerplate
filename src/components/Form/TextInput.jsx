@@ -12,17 +12,17 @@ var TextInput = React.createClass({
 
   render() {
     let groupClasses = ClassNames(ObjectAssign({
-        'form-group': true,
-        'has-error': this.showError(),
-        'has-feedback': this.showError()
+      'form-group': true,
+      'has-error': this.showError(),
+      'has-feedback': this.showError()
     }, this.props.groupClasses))
 
     let labelClasses = ClassNames(ObjectAssign({
-        'control-label': true
+      'control-label': true
     }, this.props.labelClasses))
 
     let helpClasses = ClassNames(ObjectAssign({
-        'help-block': true
+      'help-block': true
     }, this.props.helpClasses))
 
     let inputClasses = ClassNames(ObjectAssign({
