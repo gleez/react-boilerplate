@@ -1,5 +1,5 @@
 {
-  "name": "react-boilerplate",
+  "name": "gleez-react-boilerplate",
   "version": "1.0.0",
   "description": "Quick packager-agnostic boilerplate for React modules using JSX",
   "main": "webpack.config.js",
@@ -56,7 +56,6 @@
     "object-assign": "^3.0.0",
     "react": "^0.14.0-beta",
     "react-dom": "^0.14.0-beta",
-    "react-mixin": "^1.7.0",
     "react-router": "^1.0.0-beta",
     "superagent": "^1.2.0"
   }

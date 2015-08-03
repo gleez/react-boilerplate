@@ -1,6 +1,4 @@
 import React from 'react'
-import LinkedStateMixin from 'react-addons-linked-state-mixin'
-import ReactMixin from 'react-mixin'
 import Header from '../../Common/Header'
 import Footer from '../../Common/Footer'
 import Formsy from 'formsy-react'
@@ -99,5 +97,3 @@ export default class Register extends React.Component {
     )
   }
 }
-
-ReactMixin(Register.prototype, LinkedStateMixin)

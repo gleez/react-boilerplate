@@ -3,33 +3,18 @@ import ObjectAssign from 'object-assign'
 import ClassNames from 'classnames'
 import Formsy from "formsy-react"
 
-let TextInput = React.createClass({
+let TextAreaInput = React.createClass({
   mixins: [Formsy.Mixin],
 
   propTypes: {
-    type: React.PropTypes.oneOf([
-      'color',
-      'date',
-      'datetime',
-      'datetime-local',
-      'email',
-      'hidden',
-      'month',
-      'number',
-      'password',
-      'range',
-      'search',
-      'tel',
-      'text',
-      'time',
-      'url',
-      'week'
-    ])
+    rows: React.PropTypes.number,
+    cols: React.PropTypes.number
   },
 
   getDefaultProps: function() {
     return {
-      type: 'text'
+      rows: 3,
+      cols: 0 // React doesn't render the cols attribute if it is zero
     }
   },
 
@@ -45,17 +30,17 @@ let TextInput = React.createClass({
     }, this.props.inputClasses))
 
     return (
-      <input
+      <textarea
         name={this.props.name}
-        type={this.props.type}
         ref={this.props.name}
+        rows={this.props.rows}
+        cols={this.props.cols}
         className={inputClasses}
         value={this.getValue()}
         onChange={this.changeValue}
         placeholder={this.props.placeholder}
-        autoCapitalize={this.props.autoCapitalize}
         disabled={this.isFormDisabled() || this.props.disabled}
-      />
+      ></textarea>
     )
   },
 
@@ -99,11 +84,11 @@ let TextInput = React.createClass({
       <div className={groupClasses}>
         {labelComponent}
         {this.renderElement()}
-        {iconComponent}
+        {/*iconComponent*/}
         {helpComponent}
       </div>
     )
   }
 })
 
-export default TextInput
+export default TextAreaInput

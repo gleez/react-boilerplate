@@ -1,8 +1,9 @@
 import React from 'react'
-import LinkedStateMixin from 'react-addons-linked-state-mixin'
-import ReactMixin from 'react-mixin'
 import Header from './Common/Header'
 import Footer from './Common/Footer'
+import Formsy from 'formsy-react'
+import TextInput from './Form/TextInput'
+import TextAreaInput from './Form/TextAreaInput'
 import '../less/main'
 
 export default class Contact extends React.Component {
@@ -19,6 +20,21 @@ export default class Contact extends React.Component {
     document.title = "Contact | My App"
   }
 
+  enableButton() {
+    this.setState({
+      canSubmit: true
+    })
+  }
+
+  disableButton() {
+    this.setState({
+      canSubmit: false
+    })
+  }
+
+  submit(model) {
+  }
+
   render() {
     return (
       <div>
@@ -29,21 +45,46 @@ export default class Contact extends React.Component {
               <div className="page-header">
                 <h1>Send a message</h1>
               </div>
-              <form role="form">
-                <div className="form-group">
-                  <label htmlFor="name">Your Name</label>
-                  <input type="text" valueLink={this.linkState('name')} className="form-control" ref="name" placeholder="Your name" required />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="email">Your Email</label>
-                  <input type="text" valueLink={this.linkState('email')} className="form-control" ref="email" placeholder="Your email" required />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="message">Your Message</label>
-                  <textarea type="text" valueLink={this.linkState('message')} className="form-control" ref="message" rows="5" placeholder="Your message" required />
-                </div>
-                <button type="submit" className="btn btn-primary">Send Message</button>
-              </form>
+              <Formsy.Form onValidSubmit={this.submit} onValid={this.enableButton.bind(this)} onInvalid={this.disableButton.bind(this)}>
+                <TextInput
+                  name="name"
+                  label="Full Name"
+                  type="text"
+                  placeholder = "Your Name"
+                  validations="isWords"
+                  validationError="This is not a valid name"
+                  required
+                />
+                <TextInput
+                  name="email"
+                  label="Your Email"
+                  type="text"
+                  placeholder = "Your email"
+                  validations={{
+                    isEmail: true,
+                    maxLength: 50
+                  }}
+                  validationErrors={{
+                    isEmail: 'You have to type valid email',
+                    maxLength: 'You can not type in more than 50 characters'
+                  }}
+                  required
+                />
+              <TextAreaInput
+                  name="message"
+                  label="Your Message"
+                  placeholder = "Your Message"
+                  rows={5}
+                  validations={{
+                    minLength: 50
+                  }}
+                  validationErrors={{
+                    minLength: 'Not a valid message'
+                  }}
+                  required
+                />
+                <button type="submit" disabled={!this.state.canSubmit} className="btn btn-primary">Send Message</button>
+              </Formsy.Form>
             </div>
             <div className="col-sm-6 text-center">
               <div className="page-header">
@@ -59,4 +100,3 @@ export default class Contact extends React.Component {
     )
   }
 }
-ReactMixin(Contact.prototype, LinkedStateMixin)
