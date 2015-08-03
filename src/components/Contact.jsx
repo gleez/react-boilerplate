@@ -32,7 +32,12 @@ export default class Contact extends React.Component {
     })
   }
 
-  submit(model) {
+  resetForm() {
+    this.refs.form.reset()
+  }
+
+  submitForm(data) {
+    console.log(data)
   }
 
   render() {
@@ -45,7 +50,7 @@ export default class Contact extends React.Component {
               <div className="page-header">
                 <h1>Send a message</h1>
               </div>
-              <Formsy.Form onValidSubmit={this.submit} onValid={this.enableButton.bind(this)} onInvalid={this.disableButton.bind(this)}>
+              <Formsy.Form onValidSubmit={this.submitForm.bind(this)} onValid={this.enableButton.bind(this)} onInvalid={this.disableButton.bind(this)} ref="form">
                 <TextInput
                   name="name"
                   label="Your Name"
@@ -76,7 +81,7 @@ export default class Contact extends React.Component {
                   placeholder = "Enter Message"
                   rows={5}
                   validations={{
-                    minLength: 50
+                    minLength: 10
                   }}
                   validationErrors={{
                     minLength: 'Not a valid message'

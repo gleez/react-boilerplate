@@ -1,21 +1,19 @@
-import BaseStore from '../../stores/BaseStore'
+import BaseStore from '../../../stores/BaseStore'
 
-let defaultLoginState = {
+let loginState = {
+  data: '',
   loading: false,
   success: false,
-  error: undefined,
-  hasError: {},
-  help: {}
+  hasErrors: {}
 }
 
 class AuthStore extends BaseStore {
-
   constructor() {
     super()
   }
 
   getLoginState() {
-		return defaultLoginState
+		return loginState
 	}
 
   reset() {

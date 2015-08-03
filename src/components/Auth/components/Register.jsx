@@ -8,10 +8,7 @@ export default class Register extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      name: '',
-      company: '',
-      email: '',
-      password: '',
+      data: '',
       canSubmit: false
     }
   }
@@ -33,7 +30,12 @@ export default class Register extends React.Component {
     })
   }
 
-  submit(model) {
+  resetForm() {
+    this.refs.form.reset()
+  }
+
+  submitForm(data) {
+    console.log(data)
   }
 
   render() {
@@ -46,7 +48,7 @@ export default class Register extends React.Component {
               <div className="page-header">
                 <h1>Register</h1>
               </div>
-              <Formsy.Form onValidSubmit={this.submit} onValid={this.enableButton.bind(this)} onInvalid={this.disableButton.bind(this)}>
+              <Formsy.Form onValidSubmit={this.submitForm.bind(this)} onValid={this.enableButton.bind(this)} onInvalid={this.disableButton.bind(this)} ref="form">
                 <TextInput
                   name="name"
                   label="Full Name"
@@ -85,6 +87,12 @@ export default class Register extends React.Component {
                   label="Password"
                   type="password"
                   placeholder="Your Password"
+                  validations={{
+                    minLength: 5
+                  }}
+                  validationErrors={{
+                    minLength: 'You can not type less than 5 characters'
+                  }}
                   required
                 />
               <button type="submit" disabled={!this.state.canSubmit} className="btn btn-primary" >Submit</button>

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router'
-import AuthStore from '../AuthStore'
+import AuthStore from '../stores/AuthStore'
+import AuthActions from '../actions/AuthActions'
 import Header from '../../Common/Header'
 import Footer from '../../Common/Footer'
 import Formsy from 'formsy-react'
@@ -29,7 +30,14 @@ export default class Login extends React.Component {
     })
   }
 
-  submit(model) {
+  resetForm() {
+    this.refs.form.reset()
+  }
+
+  submitForm(data, resetForm, invalidateForm) {
+    console.log(data)
+    AuthActions.login(data)
+    //invalidateForm({email: 'This is invalid'})
   }
 
   render() {
@@ -42,7 +50,7 @@ export default class Login extends React.Component {
               <div className="page-header">
                 <h1>Login</h1>
               </div>
-              <Formsy.Form onValidSubmit={this.submit} onValid={this.enableButton.bind(this)} onInvalid={this.disableButton.bind(this)}>
+              <Formsy.Form onValidSubmit={this.submitForm.bind(this)} onValid={this.enableButton.bind(this)} onInvalid={this.disableButton.bind(this)} ref="form">
                 <TextInput
                   name="email"
                   label="Email"
