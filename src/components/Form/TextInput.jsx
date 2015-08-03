@@ -36,7 +36,7 @@ let TextInput = React.createClass({
   changeValue(event) {
     let value = event.currentTarget.value
     this.setValue(value)
-    this.props.onChange(this.props.name, value)
+    //this.props.onChange(this.props.name, value)
   },
 
   renderElement: function() {

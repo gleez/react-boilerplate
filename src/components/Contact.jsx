@@ -48,9 +48,9 @@ export default class Contact extends React.Component {
               <Formsy.Form onValidSubmit={this.submit} onValid={this.enableButton.bind(this)} onInvalid={this.disableButton.bind(this)}>
                 <TextInput
                   name="name"
-                  label="Full Name"
+                  label="Your Name"
                   type="text"
-                  placeholder = "Your Name"
+                  placeholder = "Enter Name"
                   validations="isWords"
                   validationError="This is not a valid name"
                   required
@@ -59,7 +59,7 @@ export default class Contact extends React.Component {
                   name="email"
                   label="Your Email"
                   type="text"
-                  placeholder = "Your email"
+                  placeholder = "Enter Email"
                   validations={{
                     isEmail: true,
                     maxLength: 50
@@ -72,8 +72,8 @@ export default class Contact extends React.Component {
                 />
               <TextAreaInput
                   name="message"
-                  label="Your Message"
-                  placeholder = "Your Message"
+                  label="Message"
+                  placeholder = "Enter Message"
                   rows={5}
                   validations={{
                     minLength: 50

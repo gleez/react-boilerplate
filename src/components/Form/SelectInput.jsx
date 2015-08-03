@@ -20,8 +20,9 @@ let SelectInput = React.createClass({
     } else {
       value = target.value
     }
+  
     this.setValue(value)
-    this.props.onChange(this.props.name, value)
+    //this.props.onChange(this.props.name, value)
   },
 
   render: function() {
