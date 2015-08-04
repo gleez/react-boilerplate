@@ -14,6 +14,13 @@ class AppDispatcher extends Dispatcher {
       action: action
     })
   }
+
+  handleRequestAction(action) {
+    this.dispatch({
+      source: 'REQUEST_ACTION',
+      action: action
+    })
+  }
 }
 
 export default new AppDispatcher()

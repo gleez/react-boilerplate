@@ -35,7 +35,7 @@ export default class Login extends React.Component {
   }
 
   submitForm(data, resetForm, invalidateForm) {
-    console.log(data)
+    //console.log(data)
     AuthActions.login(data)
     //invalidateForm({email: 'This is invalid'})
   }

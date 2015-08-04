@@ -1,4 +1,4 @@
-var BASE_URL = 'https://notify.gleez.org/'
+var BASE_URL = 'https://notify.gleez.org'
 
 export default {
   BASE_URL: BASE_URL,
