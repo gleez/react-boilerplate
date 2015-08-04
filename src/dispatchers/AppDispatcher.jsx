@@ -1,26 +1,29 @@
 import { Dispatcher } from 'flux'
-import PayloadSources from '../constants/PayloadSources'
 
 class AppDispatcher extends Dispatcher {
-  handleViewAction(action) {
-    this.dispatch({
-      source: PayloadSources.VIEW_ACTION,
-      action: action
-    })
-  }
+  handleAction(source, type, data) {
+    if (arguments.length < 2 || arguments.length > 3) {
+      let message = 'Expected two or three arguments.'
+      throw new Error(message)
+    }
+    else if (arguments.length === 2) {
+      data = type
+      type = source
+      source = undefined
+    }
 
-  handleServerAction(action) {
-    this.dispatch({
-      source: PayloadSources.SERVER_ACTION,
-      action: action
-    })
-  }
+    let payload = {
+      action: {
+        type: type,
+        data: data
+      }
+    }
 
-  handleAction(source, action) {
-    this.dispatch({
-      source: source,
-      action: action
-    })
+    if (source) {
+      payload.source = source
+    }
+
+    this.dispatch(payload)
   }
 }
 

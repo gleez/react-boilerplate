@@ -6,16 +6,33 @@ import Header from '../../Common/Header'
 import Footer from '../../Common/Footer'
 import Formsy from 'formsy-react'
 import TextInput from '../../Form/TextInput'
+import Button from '../../Form/Button'
+import Spinner from '../../Form/Spinner'
 
 export default class Login extends React.Component {
   constructor() {
     super()
     this.state = AuthStore.getLoginState()
+
+    // In ES6, no autobinding of 'this'. We create a callback bindid function to use with EventEmitter
+    this.changeCallback = this.onStoreChange.bind(this)
   }
 
   componentDidMount () {
     document.title = "Login | My App"
     //this.refs.email.refs.inputField.focus()
+  }
+
+  componentWillMount() {
+    AuthStore.addChangeListener(this.changeCallback)
+  }
+
+  componentWillUnmount() {
+    AuthStore.removeChangeListener(this.changeCallback)
+  }
+
+  onStoreChange() {
+    this.setState(AuthStore.getLoginState())
   }
 
   enableButton() {
@@ -35,12 +52,19 @@ export default class Login extends React.Component {
   }
 
   submitForm(data, resetForm, invalidateForm) {
-    //console.log(data)
     AuthActions.login(data)
     //invalidateForm({email: 'This is invalid'})
   }
 
   render() {
+    let alerts = []
+    if (this.state.success) {
+      alerts.push(<div key="success" className="alert alert-success"> Success. Redirecting...</div>)
+    }
+    else if (this.state.error) {
+      alerts.push(<div key="danger" className="alert alert-danger">{this.state.error}</div>)
+    }
+
     return (
       <div>
         <Header/>
@@ -50,12 +74,19 @@ export default class Login extends React.Component {
               <div className="page-header">
                 <h1>Login</h1>
               </div>
-              <Formsy.Form onValidSubmit={this.submitForm.bind(this)} onValid={this.enableButton.bind(this)} onInvalid={this.disableButton.bind(this)} ref="form">
+              {alerts}
+              <Formsy.Form
+                onValidSubmit={this.submitForm.bind(this)}
+                onValid={this.enableButton.bind(this)}
+                onInvalid={this.disableButton.bind(this)}
+                ref="form"
+                disabled = {this.state.loading}
+                >
                 <TextInput
                   name="email"
                   label="Email"
                   type="text"
-                  placeholder = "Your email"
+                  placeholder = "Enter email"
                   validations={{
                     isEmail: true,
                     maxLength: 50
@@ -70,10 +101,17 @@ export default class Login extends React.Component {
                   name="password"
                   label="Password"
                   type="password"
-                  placeholder = "Your Password"
+                  placeholder = "Enter Password"
                   required
                 />
-                <button type="submit" disabled={!this.state.canSubmit} className="btn btn-primary">Submit</button>
+                <Button
+                    type="submit"
+                    inputClasses={{ 'btn-primary': true }}
+                    disabled={!this.state.canSubmit || this.state.loading}>
+
+                    Sign in
+                    <Spinner space="left" show={this.state.loading} />
+                </Button>
               </Formsy.Form>
             </div>
           </div>
