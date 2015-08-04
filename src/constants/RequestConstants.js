@@ -1,9 +1,14 @@
-export default {
-  FETCHING: 'REQUEST_FETCHING',
-  PENDING: 'REQUEST_PENDING',
-  TIMEOUT: 'REQUEST_TIMEOUT',
-  ERROR: 'REQUEST_ERROR',
-  CORSERROR: 'REQUEST_CORS_ERROR',
-  SUCCESS: 'REQUEST_SUCCESS',
-  COMPLETED: 'REQUEST_COMPLETED'
-}
+let FluxConstant = require('flux-constant')
+
+let cons = FluxConstant.set([
+  'COMPLETED',
+  'CORS_ERROR',
+  'ERROR',
+  'FETCHING',
+  'PENDING',
+  'REQERROR',
+  'SUCCESS',
+  'TIMEOUT'
+])
+
+export default cons

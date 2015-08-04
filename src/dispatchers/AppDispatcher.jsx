@@ -1,23 +1,24 @@
 import { Dispatcher } from 'flux'
+import PayloadSources from '../constants/PayloadSources'
 
 class AppDispatcher extends Dispatcher {
   handleViewAction(action) {
     this.dispatch({
-      source: 'VIEW_ACTION',
+      source: PayloadSources.VIEW_ACTION,
       action: action
     })
   }
 
   handleServerAction(action) {
     this.dispatch({
-      source: 'SERVER_ACTION',
+      source: PayloadSources.SERVER_ACTION,
       action: action
     })
   }
 
-  handleRequestAction(action) {
+  handleAction(source, action) {
     this.dispatch({
-      source: 'REQUEST_ACTION',
+      source: source,
       action: action
     })
   }

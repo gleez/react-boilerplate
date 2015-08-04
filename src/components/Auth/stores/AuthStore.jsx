@@ -10,6 +10,12 @@ let loginState = {
 class AuthStore extends BaseStore {
   constructor() {
     super()
+    this.subscribe(() => this.registerToActions.bind(this))
+  }
+
+  registerToActions(payload) {
+    let action = payload.action
+    console.log(action)
   }
 
   getLoginState() {
