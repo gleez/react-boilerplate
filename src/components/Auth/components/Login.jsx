@@ -8,6 +8,7 @@ import Formsy from 'formsy-react'
 import TextInput from '../../Form/TextInput'
 import Button from '../../Form/Button'
 import Spinner from '../../Form/Spinner'
+import Alert from '../../Common/Alert'
 
 export default class Login extends React.Component {
   constructor() {
@@ -56,10 +57,10 @@ export default class Login extends React.Component {
   render() {
     let alerts = []
     if (this.state.success) {
-      alerts.push(<div key="success" className="alert alert-success">Success. Redirecting...</div>)
+      alerts.push(<Alert key="success" type="success" dismissable dismissAfter={5000} icon='fa-check-circle'> Success. Redirecting...</Alert>)
     }
     else if (this.state.error) {
-      alerts.push(<div key="danger" className="alert alert-danger">{this.state.error}</div>)
+      alerts.push(<Alert key="danger" type="danger" dismissable dismissAfter={5000} icon='fa-exclamation-triangle'> {this.state.help}</Alert>)
     }
 
     return (
@@ -77,7 +78,7 @@ export default class Login extends React.Component {
                 onValid={this.enableButton.bind(this)}
                 onInvalid={this.disableButton.bind(this)}
                 ref="form"
-                disabled = {this.state.loading}
+                disabled={this.state.loading}
                 validationErrors={this.state.hasErrors}
                 >
                 <TextInput

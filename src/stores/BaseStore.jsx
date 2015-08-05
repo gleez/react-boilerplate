@@ -28,7 +28,7 @@ export default class BaseStore extends EventEmitter {
   }
 
   get getDefaultState() {
-    return { loading: false, success: false, data: '', error: undefined, hasErrors: {}, canSubmit: true }
+    return { loading: false, success: false, error: false, help: undefined, hasErrors: null, data: '', canSubmit: true }
   }
 
   registerToActions(payload) {
@@ -46,16 +46,20 @@ export default class BaseStore extends EventEmitter {
     let {err, res, timeout} = data
 
     if (err && err.timeout === timeout) {
-      response.error = "Request Timed out"
+      response.error = true
+      response.help = "Request Timed out"
     }
     else if (err && err.crossDomain) {
-      response.error = "cross Domain Error"
+      response.error = true
+      response.help = "cross Domain Error"
     }
     else if (err && !res) {
-      response.error = err.message
+      response.error = true
+      response.help = err.message
     }
     else if (res && !res.ok) {
-      response.error = res.text
+      response.error = true
+      response.help = res.text
     }
     else if (validation && validation.keys) {
       let forField = validation.keys.pop()

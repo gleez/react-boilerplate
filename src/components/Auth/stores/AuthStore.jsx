@@ -15,7 +15,7 @@ class AuthStore extends BaseStore {
         this.loginState = this.ParseResponse(null, action.data)
         this.loginState.loading = false
         if(this.loginState.error != undefined && this.hasErrors == null) {
-          this.loginState.hasErrors = {email: '', password: ''}
+          //this.loginState.hasErrors = {email: '', password: ''}
         }
         this.emitChange()
         break

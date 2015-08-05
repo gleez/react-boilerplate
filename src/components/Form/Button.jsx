@@ -12,19 +12,19 @@ export default class Button extends React.Component {
 
   render() {
     let inputClasses = ClassNames(ObjectAssign({
-        'btn': true
+      'btn': true
     }, this.props.inputClasses))
 
     return (
       <button
-          type={this.props.type}
-          className={inputClasses}
-          name={this.props.name}
-          value={this.props.value}
-          disabled={this.props.disabled ? 'disabled' : undefined}
-          onClick={this.props.onClick}>
+        type={this.props.type}
+        className={inputClasses}
+        name={this.props.name}
+        value={this.props.value}
+        disabled={this.props.disabled ? 'disabled' : undefined}
+        onClick={this.props.onClick}>
 
-          {this.props.children}
+        {this.props.children}
       </button>
     )
   }

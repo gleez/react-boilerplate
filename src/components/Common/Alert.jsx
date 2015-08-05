@@ -3,30 +3,24 @@ import ObjectAssign from 'object-assign'
 import ClassNames from 'classnames'
 
 export default class Alert extends React.Component {
-  static propTypes = {
-    withIcon: React.PropTypes.bool,
-    alertIcon: React.PropTypes.string
-    type: React.PropTypes.oneOf(['warning', 'error', 'success', 'info', 'debug']),
-    dismissable: React.PropTypes.oneOfType([React.PropTypes.bool, React.PropTypes.func]),
-    dismissAfter: React.PropTypes.number,
-    closeLabel: React.PropTypes.string
-  }
+  constructor() {
+    super()
 
-  constructor(props) {
-    super(props)
     this.state ={
       type: 'info',
       dismissable: false,
-      withIcon: false,
-      alertIcon: false,
-      alertVisible: true,
+      icon: false,
+      visible: true,
       closeLabel: 'Close Alert'
     }
+
+    // In ES6, no autobinding of 'this'. We create a callback bindid function to use with EventEmitter
+    this.dismissCallback = this.handleAlertDismiss.bind(this)
   }
 
   componentDidMount() {
-    if (this.props.dismissAfter && this.props.onDismiss) {
-      this.dismissTimer = setTimeout(this.props.onDismiss, this.props.dismissAfter)
+    if (this.props.dismissAfter && this.props.dismissable) {
+      this.dismissTimer = setTimeout(this.dismissCallback, this.props.dismissAfter)
     }
   }
 
@@ -37,7 +31,7 @@ export default class Alert extends React.Component {
   handleAlertDismiss() {
     let {dismissable} = this.props;
     if (typeof dismissable === 'function') dismissable()
-    this.setState({alertVisible: false})
+    this.setState({visible: false})
   }
 
   renderDismissButton() {
@@ -46,33 +40,38 @@ export default class Alert extends React.Component {
         type="button"
         className="close"
         aria-label={this.props.closeLabel}
-        onClick={this.props.onDismiss}>
+        onClick={this.dismissCallback}>
         <span aria-hidden="true">&times;</span>
       </button>
     )
   }
 
   render() {
-    let {dismissable, withIcon, alertIcon, children, ...others} = this.props
+    let alertIcon
+    let {type, dismissable, icon, children} = this.props
 
-    if (this.state.alertVisible) {
-      this.props.onDismiss = dismissable ? this.handleAlertDismiss : null
-      let isDismissable = !!this.props.onDismiss
+    if (this.state.visible) {
+      let onDismiss = dismissable ? this.handleAlertDismiss : null
+      let isDismissable = !!onDismiss
 
-      if (withIcon) {
-        let icon = <i className={`fa ${alertIcon}`}></i>
-        children = <div>{icon} {children}</div>
+      if (icon) {
+        alertIcon = <i className={`fa ${icon}`}></i>
       }
 
       let alertClasses = ClassNames(ObjectAssign({
         'alert': true,
-        'alert-dismissable': isDismissable
-        'alert-' + this.props.type: true
+        'alert-dismissable': isDismissable,
+        'alert-warning': type == "warning",
+        'alert-danger': type == "danger",
+        'alert-success': type == "success",
+        'alert-info': type == "info",
+        'alert-debug': type == "debug"
       }, this.props.className))
 
       return (
-        <div {...this.props} role='alert' className={alertClasses}>
+        <div role='alert' className={alertClasses}>
           {isDismissable ? this.renderDismissButton() : null}
+          {alertIcon}&nbsp;
           {this.props.children}
         </div>
       )
@@ -80,4 +79,13 @@ export default class Alert extends React.Component {
 
     return null
   }
+}
+
+Alert.propTypes = {
+  alertIcon: React.PropTypes.string,
+  type: React.PropTypes.oneOf(['warning', 'danger', 'success', 'info', 'debug']),
+  dismissable: React.PropTypes.oneOfType([React.PropTypes.bool, React.PropTypes.func]),
+  dismissAfter: React.PropTypes.number,
+  closeLabel: React.PropTypes.string,
+  onDismiss: React.PropTypes.func
 }
