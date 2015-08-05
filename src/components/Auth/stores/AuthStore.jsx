@@ -1,8 +1,5 @@
 import BaseStore from '../../../stores/BaseStore'
-import AuthConstants from '../constants/AuthConstants'
-import PayloadSources from '../../../constants/PayloadSources'
-
-let ActionTypes = AuthConstants.ActionTypes
+import {ActionTypes} from '../constants/AuthConstants'
 
 class AuthStore extends BaseStore {
   constructor() {
@@ -11,23 +8,15 @@ class AuthStore extends BaseStore {
     this.loginState = this.getDefaultState
   }
 
-  registerToActions(payload) {
-    if(PayloadSources.SERVER_ACTION === payload.source) {
-      this.handleServerActions(payload)
-    }
-
-    if(PayloadSources.VIEW_ACTION === payload.source) {
-      this.handleViewActions(payload)
-    }
-  }
-
   handleServerActions(payload) {
     let action = payload.action
     switch(action.type) {
       case ActionTypes.LOGIN:
         this.loginState = this.ParseResponse(null, action.data)
         this.loginState.loading = false
-        //this.loginState.hasErrors = {email: 'This is invalid', password: 'This is invalid'}
+        if(this.loginState.error != undefined && this.hasErrors == null) {
+          this.loginState.hasErrors = {email: '', password: ''}
+        }
         this.emitChange()
         break
       default:
@@ -52,8 +41,8 @@ class AuthStore extends BaseStore {
 		return this.loginState
 	}
 
-  reset() {
-    return this.getDefaultState
+  loginReset() {
+    this.loginState = this.getDefaultState
   }
 }
 

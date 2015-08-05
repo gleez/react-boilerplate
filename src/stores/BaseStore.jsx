@@ -1,5 +1,6 @@
 import { EventEmitter } from 'events'
 import AppDispatcher from '../dispatchers/AppDispatcher'
+import PayloadSources from '../constants/PayloadSources'
 
 export default class BaseStore extends EventEmitter {
   constructor() {
@@ -28,6 +29,16 @@ export default class BaseStore extends EventEmitter {
 
   get getDefaultState() {
     return { loading: false, success: false, data: '', error: undefined, hasErrors: {} }
+  }
+
+  registerToActions(payload) {
+    if(PayloadSources.SERVER_ACTION === payload.source) {
+      this.handleServerActions(payload)
+    }
+
+    if(PayloadSources.VIEW_ACTION === payload.source) {
+      this.handleViewActions(payload)
+    }
   }
 
   ParseResponse(validation, data) {

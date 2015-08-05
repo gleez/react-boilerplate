@@ -24,10 +24,12 @@ export default class Login extends React.Component {
   }
 
   componentWillMount() {
+    AuthStore.loginReset()
     AuthStore.addChangeListener(this.changeCallback)
   }
 
   componentWillUnmount() {
+    AuthStore.loginReset()
     AuthStore.removeChangeListener(this.changeCallback)
   }
 
@@ -47,19 +49,14 @@ export default class Login extends React.Component {
     })
   }
 
-  resetForm() {
-    this.refs.form.reset()
-  }
-
   submitForm(data, resetForm, invalidateForm) {
     AuthActions.login(data)
-    //invalidateForm({email: 'This is invalid'})
   }
 
   render() {
     let alerts = []
     if (this.state.success) {
-      alerts.push(<div key="success" className="alert alert-success"> Success. Redirecting...</div>)
+      alerts.push(<div key="success" className="alert alert-success">Success. Redirecting...</div>)
     }
     else if (this.state.error) {
       alerts.push(<div key="danger" className="alert alert-danger">{this.state.error}</div>)
@@ -81,6 +78,7 @@ export default class Login extends React.Component {
                 onInvalid={this.disableButton.bind(this)}
                 ref="form"
                 disabled = {this.state.loading}
+                validationErrors={this.state.hasErrors}
                 >
                 <TextInput
                   name="email"
