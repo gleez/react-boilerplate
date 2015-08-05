@@ -1,59 +1,59 @@
 import BaseStore from '../../../stores/BaseStore'
 import AuthConstants from '../constants/AuthConstants'
 import PayloadSources from '../../../constants/PayloadSources'
-import ParseResponse from '../../../utils/ParseResponse'
 
 let ActionTypes = AuthConstants.ActionTypes
-let data = {
-  data: '',
-  error: undefined,
-  loading: false,
-  success: false,
-  hasErrors: {},
-  help: {}
-}
 
 class AuthStore extends BaseStore {
   constructor() {
     super()
     this.subscribe(() => this.registerToActions.bind(this))
-    this.state = data
+    this.loginState = this.getDefaultState
   }
 
   registerToActions(payload) {
-    let action = payload.action
-
     if(PayloadSources.SERVER_ACTION === payload.source) {
-      switch(action.type) {
-      	case ActionTypes.LOGIN:
-          this.state = ParseResponse(null, action.data)
-          this.state.loading = false
-          //this.state.hasErrors = {email: 'This is invalid', password: 'This is invalid'}
-      	  this.emitChange()
-      		break
-      	default:
-      		break
-      }
+      this.handleServerActions(payload)
     }
 
     if(PayloadSources.VIEW_ACTION === payload.source) {
-      switch(action.type) {
-        case ActionTypes.LOGIN:
-          this.state.loading = true
-          this.emitChange()
-          break
-        default:
-          break
-      }
+      this.handleViewActions(payload)
+    }
+  }
+
+  handleServerActions(payload) {
+    let action = payload.action
+    switch(action.type) {
+      case ActionTypes.LOGIN:
+        this.loginState = this.ParseResponse(null, action.data)
+        this.loginState.loading = false
+        //this.loginState.hasErrors = {email: 'This is invalid', password: 'This is invalid'}
+        this.emitChange()
+        break
+      default:
+        break
+    }
+  }
+
+  handleViewActions(payload) {
+    let action = payload.action
+    switch(action.type) {
+      case ActionTypes.LOGIN:
+        this.loginState = this.getDefaultState
+        this.loginState.loading = true
+        this.emitChange()
+        break
+      default:
+        break
     }
   }
 
   getLoginState() {
-		return this.state
+		return this.loginState
 	}
 
   reset() {
-    return data
+    return this.getDefaultState
   }
 }
 
