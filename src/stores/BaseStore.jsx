@@ -28,7 +28,7 @@ export default class BaseStore extends EventEmitter {
   }
 
   get getDefaultState() {
-    return { loading: false, success: false, data: '', error: undefined, hasErrors: {} }
+    return { loading: false, success: false, data: '', error: undefined, hasErrors: {}, canSubmit: true }
   }
 
   registerToActions(payload) {

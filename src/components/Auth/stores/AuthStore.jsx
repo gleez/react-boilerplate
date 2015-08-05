@@ -44,6 +44,14 @@ class AuthStore extends BaseStore {
   loginReset() {
     this.loginState = this.getDefaultState
   }
+
+  set enableLoginButton(enable) {
+    this.loginState.canSubmit = true
+  }
+
+  set disableLoginButton(disable) {
+    this.loginState.canSubmit = false
+  }
 }
 
 export default new AuthStore()

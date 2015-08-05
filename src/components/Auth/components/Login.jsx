@@ -12,6 +12,8 @@ import Spinner from '../../Form/Spinner'
 export default class Login extends React.Component {
   constructor() {
     super()
+
+    AuthStore.loginReset()
     this.state = AuthStore.getLoginState()
 
     // In ES6, no autobinding of 'this'. We create a callback bindid function to use with EventEmitter
@@ -24,12 +26,10 @@ export default class Login extends React.Component {
   }
 
   componentWillMount() {
-    AuthStore.loginReset()
     AuthStore.addChangeListener(this.changeCallback)
   }
 
   componentWillUnmount() {
-    AuthStore.loginReset()
     AuthStore.removeChangeListener(this.changeCallback)
   }
 
