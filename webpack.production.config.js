@@ -9,6 +9,7 @@ module.exports = {
   },
   output: {
     path: 'public/assets/',
+    //path: path.join(__dirname, 'public/assets/'),
     filename: 'app.[hash].js',
     //filename: '[name].[hash].js',
     //chunkFilename: '[name].chunk.js',
@@ -27,6 +28,11 @@ module.exports = {
     extensions: ['', '.js', '.jsx', '.less', '.css']
   },
   module: {
+    preLoaders: [{
+      test: /\.js$/,
+      loaders: ['babel'],
+      include: [path.resolve(__dirname, "node_modules/formsy-react")]
+    }],
     loaders: [
       {
         test: /\.jsx?$/, loader: 'babel',

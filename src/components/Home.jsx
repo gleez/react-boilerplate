@@ -12,9 +12,12 @@ export default class Home extends Component {
     return (
       <div>
         <Header/>
-        <div className="container">
-          <h1>Hello, World!</h1>
-        </div>
+        <main className="bs-docs-masthead" id="content" role="main" tabIndex="-1">
+          <div className="container">
+            <span className="bs-docs-booticon bs-docs-booticon-lg bs-docs-booticon-outline">R</span>
+            <p className="lead">A starter kit for React.js Websites and Apps</p>
+          </div>
+        </main>
         <Footer/>
       </div>
     )

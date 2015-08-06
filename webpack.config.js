@@ -19,12 +19,7 @@ module.exports = {
     new webpack.optimize.CommonsChunkPlugin('app', null)
   ],
   resolve: {
-    extensions: ['', '.js', '.jsx', '.less', '.css'],
-    alias: {
-      //'formsy-react': path.join(__dirname, 'node_modules/formsy-react/release/formsy-react.js'),
-      //'formsy-react': path.join(__dirname, 'src/lib/main.js'),
-      //'formsy': path.join(__dirname, 'node_modules/formsy-react/release/formsy-react.js'),
-    }
+    extensions: ['', '.js', '.jsx', '.less', '.css']
   },
   module: {
     preLoaders: [{
