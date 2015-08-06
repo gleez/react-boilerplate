@@ -8,21 +8,27 @@ module.exports = {
     app: './src/index',
   },
   output: {
-    path: 'public/assets/',
-    //path: path.join(__dirname, 'public/assets/'),
+    path: path.join(__dirname, 'public/assets/'),
     filename: 'app.[hash].js',
-    //filename: '[name].[hash].js',
-    //chunkFilename: '[name].chunk.js',
+    //chunkFilename: '[id].[hash].chunk.js',
     publicPath: '/assets/'
   },
   plugins: [
     new webpack.DefinePlugin({"process.env": {NODE_ENV: JSON.stringify("production")}}),
-    new webpack.optimize.UglifyJsPlugin({minimize: true}),
+    new webpack.optimize.UglifyJsPlugin({
+      mangle: true,
+      compress: true,
+      beautify: true,
+      output: {
+        beautify: false,
+        ascii_only: true
+      }
+    }),
     new webpack.optimize.DedupePlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.optimize.CommonsChunkPlugin('app', null, Infinity),
     new ExtractTextPlugin("[name].[hash].css", {allChunks: true}),
-    new HtmlWebpackPlugin({title: "My App", filename: '/admin.html'})
+    new HtmlWebpackPlugin({title: "My App", filename: '../index.html', template: 'index.tmpl'})
   ],
   resolve: {
     extensions: ['', '.js', '.jsx', '.less', '.css']

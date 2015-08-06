@@ -48,7 +48,7 @@ export default class Alert extends React.Component {
 
   render() {
     let alertIcon
-    let {type, dismissable, icon, children} = this.props
+    let {type, dismissable, icon} = this.props
 
     if (this.state.visible) {
       let onDismiss = dismissable ? this.handleAlertDismiss : null

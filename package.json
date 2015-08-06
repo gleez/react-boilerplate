@@ -18,14 +18,18 @@
     "flux",
     "es6",
     "reload",
+    "react-component",
     "hot reload",
     "jsx",
     "webpack"
   ],
   "scripts": {
+    "clean": "rimraf public",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node server.js",
-    "deploy": "NODE_ENV=production webpack -p --config webpack.production.config.js"
+    "start": "node server.js",
+    "deploy": "webpack -p --progress --colors --config webpack.production.config.js --json > webpack-stats.json",
+    "predeploy": "rimraf public",
+    "publish": "npm run deploy && git checkout gh-pages && cp public/* . && git commit -am 'Code update' && git push && git checkout master"
   },
   "author": "Gleez Technologies",
   "license": "MIT",
@@ -43,6 +47,7 @@
     "less": "^2.5.1",
     "less-loader": "^2.2.0",
     "react-hot-loader": "^1.2.8",
+    "rimraf": "^2.4.2",
     "style-loader": "^0.12.3",
     "url-loader": "^0.5.6",
     "webpack": "^1.10.5",
