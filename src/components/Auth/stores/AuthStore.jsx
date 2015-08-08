@@ -6,6 +6,7 @@ class AuthStore extends BaseStore {
     super()
     this.subscribe(() => this.registerToActions.bind(this))
     this.loginState = this.getDefaultState
+    this.signupState = this.getDefaultState
   }
 
   handleServerActions(payload) {
@@ -45,12 +46,12 @@ class AuthStore extends BaseStore {
     this.loginState = this.getDefaultState
   }
 
-  set enableLoginButton(enable) {
-    this.loginState.canSubmit = true
-  }
+  getSignupState() {
+		return this.signupState
+	}
 
-  set disableLoginButton(disable) {
-    this.loginState.canSubmit = false
+  signupReset() {
+    this.signupState = this.getDefaultState
   }
 }
 

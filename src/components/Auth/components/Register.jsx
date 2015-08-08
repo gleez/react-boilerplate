@@ -1,41 +1,45 @@
 import React from 'react'
+import AuthStore from '../stores/AuthStore'
 import Header from '../../Common/Header'
 import Footer from '../../Common/Footer'
-import Formsy from 'formsy-react'
-import TextInput from '../../Form/TextInput'
+import Form from '../../Form/Form'
 
 export default class Register extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      data: '',
-      canSubmit: false
-    }
+  constructor() {
+    super()
+
+    AuthStore.signupReset()
+    this.state = AuthStore.getSignupState()
+
+    // In ES6, no autobinding of 'this'. We create a callback bindid function to use with EventEmitter
+    this.changeCallback = this.onStoreChange.bind(this)
+
+    // Form Submission and button handling
+    this.state.submitForm = this.submitForm.bind(this)
+    this.state.setFormState = this.setFormState.bind(this)
   }
 
   componentDidMount () {
     document.title = "Signup | My App"
-    //this.refs.name.refs.inputField.focus()
   }
 
-  enableButton() {
-    this.setState({
-      canSubmit: true
-    })
+  componentWillMount() {
+    AuthStore.addChangeListener(this.changeCallback)
   }
 
-  disableButton() {
-    this.setState({
-      canSubmit: false
-    })
+  componentWillUnmount() {
+    AuthStore.removeChangeListener(this.changeCallback)
   }
 
-  resetForm() {
-    this.refs.form.reset()
+  onStoreChange() {
+    this.setState(AuthStore.getSignupState())
+  }
+
+  setFormState(props) {
+    this.setState(props)
   }
 
   submitForm(data) {
-    console.log(data)
   }
 
   render() {
@@ -48,8 +52,8 @@ export default class Register extends React.Component {
               <div className="page-header">
                 <h1>Register</h1>
               </div>
-              <Formsy.Form onValidSubmit={this.submitForm.bind(this)} onValid={this.enableButton.bind(this)} onInvalid={this.disableButton.bind(this)} ref="form">
-                <TextInput
+              <Form {...this.state}>
+                <Form.TextInput
                   name="name"
                   label="Full Name"
                   type="text"
@@ -58,7 +62,7 @@ export default class Register extends React.Component {
                   validationError="This is not a valid name"
                   required
                 />
-                <TextInput
+                <Form.TextInput
                   name="company"
                   label="Company"
                   type="text"
@@ -67,7 +71,7 @@ export default class Register extends React.Component {
                   validationError="This is not a valid company"
                   required
                 />
-                <TextInput
+                <Form.TextInput
                   name="email"
                   label="Email"
                   type="text"
@@ -82,7 +86,7 @@ export default class Register extends React.Component {
                   }}
                   required
                 />
-                <TextInput
+                <Form.TextInput
                   name="password"
                   label="Password"
                   type="password"
@@ -95,8 +99,15 @@ export default class Register extends React.Component {
                   }}
                   required
                 />
-              <button type="submit" disabled={!this.state.canSubmit} className="btn btn-primary" >Submit</button>
-              </Formsy.Form>
+                <Form.Button
+                  type="submit"
+                  inputClasses={{ 'btn-primary': true }}
+                  spinner={this.state.loading}
+                  disabled={!this.state.canSubmit || this.state.loading}
+                >
+                Sign in
+                </Form.Button>
+              </Form>
             </div>
           </div>
         </div>

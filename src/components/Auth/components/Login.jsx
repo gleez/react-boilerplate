@@ -1,14 +1,10 @@
 import React from 'react'
-import { Link } from 'react-router'
 import AuthStore from '../stores/AuthStore'
 import AuthActions from '../actions/AuthActions'
 import Header from '../../Common/Header'
 import Footer from '../../Common/Footer'
-import Formsy from 'formsy-react'
-import TextInput from '../../Form/TextInput'
-import Button from '../../Form/Button'
-import Spinner from '../../Form/Spinner'
 import Alert from '../../Common/Alert'
+import Form from '../../Form/Form'
 
 export default class Login extends React.Component {
   constructor() {
@@ -19,11 +15,14 @@ export default class Login extends React.Component {
 
     // In ES6, no autobinding of 'this'. We create a callback bindid function to use with EventEmitter
     this.changeCallback = this.onStoreChange.bind(this)
+
+    // Form Submission and button handling
+    this.state.submitForm = this.submitForm.bind(this)
+    this.state.setFormState = this.setFormState.bind(this)
   }
 
   componentDidMount () {
     document.title = "Login | My App"
-    //this.refs.email.refs.inputField.focus()
   }
 
   componentWillMount() {
@@ -38,16 +37,8 @@ export default class Login extends React.Component {
     this.setState(AuthStore.getLoginState())
   }
 
-  enableButton() {
-    this.setState({
-      canSubmit: true
-    })
-  }
-
-  disableButton() {
-    this.setState({
-      canSubmit: false
-    })
+  setFormState(props) {
+    this.setState(props)
   }
 
   submitForm(data, resetForm, invalidateForm) {
@@ -73,15 +64,8 @@ export default class Login extends React.Component {
                 <h1>Login</h1>
               </div>
               {alerts}
-              <Formsy.Form
-                onValidSubmit={this.submitForm.bind(this)}
-                onValid={this.enableButton.bind(this)}
-                onInvalid={this.disableButton.bind(this)}
-                ref="form"
-                disabled={this.state.loading}
-                validationErrors={this.state.hasErrors}
-                >
-                <TextInput
+              <Form {...this.state}>
+                <Form.TextInput
                   name="email"
                   label="Email"
                   type="text"
@@ -96,22 +80,21 @@ export default class Login extends React.Component {
                   }}
                   required
                 />
-                <TextInput
+                <Form.TextInput
                   name="password"
                   label="Password"
                   type="password"
                   placeholder = "Enter Password"
                   required
                 />
-                <Button
-                    type="submit"
-                    inputClasses={{ 'btn-primary': true }}
-                    disabled={!this.state.canSubmit || this.state.loading}>
-
-                    Sign in
-                    <Spinner space="left" show={this.state.loading} />
-                </Button>
-              </Formsy.Form>
+                <Form.Button
+                  type="submit"
+                  inputClasses={{ 'btn-primary': true }}
+                  spinner={this.state.loading}
+                  disabled={!this.state.canSubmit || this.state.loading}>
+                  Sign in
+                </Form.Button>
+              </Form>
             </div>
           </div>
         </div>

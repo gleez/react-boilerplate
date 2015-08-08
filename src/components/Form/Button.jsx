@@ -1,12 +1,14 @@
 import React from 'react'
 import ObjectAssign from 'object-assign'
 import ClassNames from 'classnames'
+import Spinner from './Spinner'
 
 export default class Button extends React.Component {
   constructor() {
     super()
     this.state = {
-      type: 'button'
+      type: 'button',
+      spinner: false
     }
   }
 
@@ -14,6 +16,11 @@ export default class Button extends React.Component {
     let inputClasses = ClassNames(ObjectAssign({
       'btn': true
     }, this.props.inputClasses))
+
+    let spinner
+    if(this.props.spinner){
+      spinner = <Spinner space="left" show={true} />
+    }
 
     return (
       <button
@@ -23,8 +30,8 @@ export default class Button extends React.Component {
         value={this.props.value}
         disabled={this.props.disabled ? 'disabled' : undefined}
         onClick={this.props.onClick}>
-
         {this.props.children}
+        {spinner}
       </button>
     )
   }
