@@ -59,6 +59,7 @@
     "flux": "^2.0.3",
     "flux-constant": "^1.0.4",
     "font-awesome": "^4.3.0",
+    "jwt-decode": "^1.4.0",
     "object-assign": "^3.0.0",
     "react": "^0.14.0-beta",
     "react-dom": "^0.14.0-beta",

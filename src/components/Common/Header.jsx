@@ -1,7 +1,58 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Link } from 'react-router'
+import AuthStore from '../Auth/stores/AuthStore'
+import AuthActions from '../Auth/actions/AuthActions'
 
-export default class Header extends Component {
+export default class Header extends React.Component {
+  constructor() {
+    super()
+    this.state = this.getLoginState()
+
+    // In ES6, no autobinding of 'this'. We create a callback bindid function to use with EventEmitter
+    this.changeCallback = this.onStoreChange.bind(this)
+  }
+
+  componentDidMount() {
+    AuthStore.addChangeListener(this.changeCallback)
+  }
+
+  componentWillUnmount() {
+    AuthStore.removeChangeListener(this.changeCallback)
+  }
+
+  onStoreChange() {
+    this.setState(this.getLoginState())
+  }
+
+  getLoginState() {
+    return {
+      userLoggedIn : AuthStore.isLoggedIn()
+    }
+  }
+
+  logout(e) {
+    e.preventDefault()
+    AuthActions.logout()
+  }
+
+  headerItems() {
+    if (!this.state.userLoggedIn) {
+      return (
+        <ul className="nav navbar-nav navbar-right">
+          <li><Link to="/auth/register">Sign up</Link></li>
+          <li><Link to="/auth/login">Login</Link></li>
+        </ul>
+      )
+    } else {
+      return (
+        <ul className="nav navbar-nav navbar-right">
+          <li><Link to="/profile">Profile</Link></li>
+          <li><a href="" onClick={this.logout}>Logout</a></li>
+        </ul>
+      )
+    }
+  }
+
   render() {
     return (
       <nav className="navbar navbar-default bs-docs-nav navbar-fixed-top">
@@ -27,14 +78,10 @@ export default class Header extends Component {
               <li><Link to="/about">About</Link></li>
               <li><Link to="/contact">Contact</Link></li>
             </ul>
-            <ul className="nav navbar-nav navbar-right">
-              <li><Link to="/profile">Profile</Link></li>
-              <li><Link to="/auth/register">Sign up</Link></li>
-              <li><Link to="/auth/login">Login</Link></li>
-            </ul>
+            {this.headerItems()}
           </div>
         </div>
       </nav>
-    );
+    )
   }
 }

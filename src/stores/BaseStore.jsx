@@ -28,7 +28,7 @@ export default class BaseStore extends EventEmitter {
   }
 
   get getDefaultState() {
-    return { loading: false, success: false, error: false, help: undefined, hasErrors: null, data: '', canSubmit: true }
+    return { loading: false, success: false, error: false, help: undefined, hasErrors: null, json: '', canSubmit: true }
   }
 
   registerToActions(payload) {
@@ -74,7 +74,7 @@ export default class BaseStore extends EventEmitter {
     }
     else if (res) {
       response.success = true
-      response.data = res.text
+      response.json = JSON.parse(res.text)
     }
 
     return response
