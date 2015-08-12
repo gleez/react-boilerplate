@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Header from './Common/Header'
 import Footer from './Common/Footer'
 import '../less/main'
+import '../less/Home'
 
 export default class Home extends Component {
   componentDidMount () {
