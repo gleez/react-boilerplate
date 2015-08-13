@@ -95,8 +95,8 @@ export default class Contact extends React.Component {
               <div className="page-header">
                 <h1>Contact us</h1>
               </div>
-              <p className="lead">Freddy can't wait to hear from you.</p><i className="fa fa-reply-all bamf"></i>
-              <div>1428 Elm Street • San Francisco, CA 94122</div>
+              <p className="lead">Sunny can't wait to hear from you.</p><i className="fa fa-reply-all bamf"></i>
+              <div>1428 Elm Street • Los Angeles, CA 94122</div>
             </div>
           </div>
         </div>
