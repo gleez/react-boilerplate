@@ -1,33 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router'
+import AuthenticatedComponent from '../AuthenticatedHOC'
 import AuthStore from '../Auth/stores/AuthStore'
 import AuthActions from '../Auth/actions/AuthActions'
 
-export default class Header extends React.Component {
-  constructor() {
-    super()
-    this.state = this.getLoginState()
-
-    // In ES6, no autobinding of 'this'. We create a callback bindid function to use with EventEmitter
-    this.changeCallback = this.onStoreChange.bind(this)
-  }
-
-  componentDidMount() {
-    AuthStore.addChangeListener(this.changeCallback)
-  }
-
-  componentWillUnmount() {
-    AuthStore.removeChangeListener(this.changeCallback)
-  }
-
-  onStoreChange() {
-    this.setState(this.getLoginState())
-  }
-
-  getLoginState() {
-    return {
-      userLoggedIn : AuthStore.isLoggedIn()
-    }
+export default AuthenticatedComponent( class Header extends React.Component {
+  constructor(props) {
+    super(props)
   }
 
   logout(e) {
@@ -35,8 +14,8 @@ export default class Header extends React.Component {
     AuthActions.logout()
   }
 
-  headerItems() {
-    if (!this.state.userLoggedIn) {
+  get headerItems() {
+    if (!this.props.userLoggedIn) {
       return (
         <ul className="nav navbar-nav navbar-right">
           <li><Link to="/auth/register">Sign up</Link></li>
@@ -78,10 +57,10 @@ export default class Header extends React.Component {
               <li><Link to="/about">About</Link></li>
               <li><Link to="/contact">Contact</Link></li>
             </ul>
-            {this.headerItems()}
+            {this.headerItems}
           </div>
         </div>
       </nav>
     )
   }
-}
+})

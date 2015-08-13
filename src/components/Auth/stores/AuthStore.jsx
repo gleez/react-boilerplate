@@ -78,7 +78,7 @@ class AuthStore extends BaseStore {
     return this._user
   }
 
-  get jwt() {
+  get token() {
     return this._accessToken
   }
 
