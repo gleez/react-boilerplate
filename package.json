@@ -1,5 +1,5 @@
 {
-  "name": "gleez-react-boilerplate",
+  "name": "@gleez/react-boilerplate",
   "version": "1.1.0",
   "description": "Quick packager-agnostic boilerplate for React modules using JSX",
   "main": "webpack.config.js",
@@ -35,7 +35,8 @@
     "start": "node server.js",
     "deploy": "webpack -p --progress --colors --config webpack.production.config.js --json > webpack-stats.json",
     "predeploy": "rimraf public",
-    "publish": "npm run deploy && git checkout gh-pages && cp public/* . && git commit -am 'Code update' && git push && git checkout master"
+    "oldpublish": "npm run deploy && git checkout gh-pages && cp public/* . && git commit -am 'Code update' && git push && git checkout master",
+    "publish": "git-directory-deploy --directory public --branch gh-pages"
   },
   "devDependencies": {
     "babel": "^5.8.9",
@@ -46,6 +47,7 @@
     "file-loader": "^0.8.4",
     "form-data-to-object": "^0.1.0",
     "formsy-react": "git://github.com/christianalfoni/formsy-react.git#react-0.14",
+    "git-directory-deploy": "^1.1.0",
     "html-loader": "^0.3.0",
     "html-webpack-plugin": "^1.6.0",
     "less": "^2.5.1",
