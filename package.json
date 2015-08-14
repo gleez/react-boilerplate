@@ -35,8 +35,7 @@
     "start": "node server.js",
     "deploy": "webpack -p --progress --colors --config webpack.production.config.js --json > webpack-stats.json",
     "predeploy": "rimraf public",
-    "oldpublish": "npm run deploy && git checkout gh-pages && cp public/* . && git commit -am 'Code update' && git push && git checkout master",
-    "publish": "git-directory-deploy --directory public --branch gh-pages"
+    "publish": "npm run deploy && git checkout gh-pages && rimraf assets && cp -rf public/* . && git add -A && git commit -m \"Code update\" && git push origin gh-pages && git checkout master"
   },
   "devDependencies": {
     "babel": "^5.8.9",
@@ -47,7 +46,6 @@
     "file-loader": "^0.8.4",
     "form-data-to-object": "^0.1.0",
     "formsy-react": "git://github.com/christianalfoni/formsy-react.git#react-0.14",
-    "git-directory-deploy": "^1.1.0",
     "html-loader": "^0.3.0",
     "html-webpack-plugin": "^1.6.0",
     "less": "^2.5.1",

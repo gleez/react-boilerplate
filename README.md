@@ -5,3 +5,6 @@ Quickstart project template for building `npm` modules with [React JSX](http://f
 Based on the architecture suggestions from Facebook, this boilerplate will help you deal with it. Read more about FLUX over at [Facebook Flux](http://facebook.github.io/flux/)
 
 Just `npm install` and `npm run deploy` when you're done. Use `npm start` to continuously build.
+
+Those who can't wait see in action!
+Demo is available here [http://react.gleez.com/](http://react.gleez.com/)
