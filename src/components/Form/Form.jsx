@@ -25,6 +25,7 @@ class FormWrapper extends React.Component {
         onInvalid={this.disableButton.bind(this)}
         disabled={this.props.loading}
         validationErrors={this.props.hasErrors}
+        className={this.props.className || undefined}
         >
         {this.props.children}
       </Formsy.Form>

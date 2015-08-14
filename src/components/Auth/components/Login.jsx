@@ -5,6 +5,7 @@ import Header from '../../Common/Header'
 import Footer from '../../Common/Footer'
 import Alert from '../../Common/Alert'
 import Form from '../../Form/Form'
+import '../../../less/Auth'
 
 export default class Login extends React.Component {
   constructor() {
@@ -27,10 +28,12 @@ export default class Login extends React.Component {
 
   componentWillMount() {
     AuthStore.addChangeListener(this.changeCallback)
+    document.body.classList.add('AuthBody')
   }
 
   componentWillUnmount() {
     AuthStore.removeChangeListener(this.changeCallback)
+    document.body.classList.remove('AuthBody')
   }
 
   onStoreChange() {
@@ -58,18 +61,17 @@ export default class Login extends React.Component {
       <div>
         <Header/>
         <div className="container">
-          <div className="row">
-            <div className="col-md-4 col-md-offset-4">
-              <div className="page-header">
-                <h1>Login</h1>
-              </div>
+          <div className="card col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
+            <div className="card-container">
               {alerts}
-              <Form {...this.state}>
+              <img className="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+              <p className="profile-name-card"></p>
+              <Form {...this.state} className="form-signin">
                 <Form.TextInput
                   name="email"
-                  label="Email"
                   type="text"
-                  placeholder = "Enter email"
+                  hideLabel={true}
+                  placeholder = "Email address"
                   validations={{
                     isEmail: true,
                     maxLength: 50
@@ -79,22 +81,24 @@ export default class Login extends React.Component {
                     maxLength: 'You can not type in more than 50 characters'
                   }}
                   required
+                  autofocus
                 />
                 <Form.TextInput
                   name="password"
-                  label="Password"
                   type="password"
-                  placeholder = "Enter Password"
+                  hideLabel={true}
+                  placeholder = "Password"
                   required
                 />
                 <Form.Button
                   type="submit"
-                  inputClasses={{ 'btn-primary': true }}
+                  inputClasses={{ 'btn-lg btn-primary btn-block btn-signin': true }}
                   spinner={this.state.loading}
                   disabled={!this.state.canSubmit || this.state.loading}>
                   Sign in
                 </Form.Button>
               </Form>
+              <a href="#" className="forgot-password"> Forgot the password? </a>
             </div>
           </div>
         </div>

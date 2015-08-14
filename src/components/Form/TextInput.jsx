@@ -49,6 +49,7 @@ let TextInput = React.createClass({
         name={this.props.name}
         type={this.props.type}
         ref={this.props.name}
+        id={this.props.id || undefined}
         className={inputClasses}
         value={this.getValue()}
         onChange={this.changeValue}
