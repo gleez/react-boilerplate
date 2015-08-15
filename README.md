@@ -6,5 +6,4 @@ Based on the architecture suggestions from Facebook, this boilerplate will help 
 
 Just `npm install` and `npm run deploy` when you're done. Use `npm start` to continuously build.
 
-Those who can't wait see in action!
-Demo is available here [http://react.gleez.com/](http://react.gleez.com/)
+Those who can't wait; see it in action! [http://react.gleez.com/](http://react.gleez.com/)

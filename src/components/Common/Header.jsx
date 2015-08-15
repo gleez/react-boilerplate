@@ -49,7 +49,7 @@ export default AuthenticatedComponent( class Header extends React.Component {
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
             </button>
-            <Link to="/" className="navbar-brand">My App</Link>
+            <Link to="/" className="navbar-brand"><i className="fa fa-random fa-lg"></i> My App</Link>
           </div>
           <div className="collapse navbar-collapse" id="navbar">
             <ul className="nav navbar-nav">

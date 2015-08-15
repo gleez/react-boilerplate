@@ -65,13 +65,19 @@ export default class Login extends React.Component {
             <div className="card-container">
               {alerts}
               <img className="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+              {
+              /*<span className="profile-img-card fa-stack fa-3x">
+    						<i className="fa fa-circle fa-stack-3x"></i>
+    						<i className="fa fa-user fa-login"></i>
+    					</span>*/
+              }
               <p className="profile-name-card"></p>
               <Form {...this.state} className="form-signin">
                 <Form.TextInput
                   name="email"
                   type="text"
                   hideLabel={true}
-                  placeholder = "Email address"
+                  placeholder = "Email"
                   validations={{
                     isEmail: true,
                     maxLength: 50

@@ -1,70 +1,80 @@
+@import "../../node_modules/bootstrap/less/mixins/gradients";
+
 .AuthBody {
-    background-color: #6f5499;
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#563d7c), to(#6f5499));
-    background-image: -webkit-linear-gradient(top, #563d7c 0%, #6f5499 100%);
-    background-image:      -o-linear-gradient(top, #563d7c 0%, #6f5499 100%);
-    background-image:         linear-gradient(to bottom, #563d7c 0%, #6f5499 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#563d7c', endColorstr='#6F5499', GradientType=0);
-    background-repeat: repeat-x;
+  background-color: #6f5499;
+  #gradient > .vertical(#563d7c; #6f5499; 0%; 100%);
 }
 
 .card {
-    background-color: #F7F7F7;
-    padding: 40px 25px 40px 30px;
-    margin-top: 50px;
-    margin-bottom: 50px;
-    max-width: 350px;
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
+  background-color: #F7F7F7;
+  padding: 40px 25px 40px 30px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  max-width: 350px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
 }
 
 .profile-img-card {
-    width: 96px;
-    height: 96px;
-    margin: 0 auto 10px;
-    display: block;
-    -moz-border-radius: 50%;
-    -webkit-border-radius: 50%;
-    border-radius: 50%;
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 10px;
+  display: block;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  color: #E1E1E1;
+}
+
+.fa-stack-3x {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 2.5em;
+}
+
+.fa-login {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 1.9em;
+  color: #BDBDBD;
 }
 
 .profile-name-card {
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
-    margin: 10px 0 0;
-    min-height: 1em;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  margin: 10px 0 0;
+  min-height: 1em;
 }
 
 .form-signin .form-control {
-    direction: ltr;
-    height: 44px;
-    font-size: 16px;
+  direction: ltr;
+  height: 44px;
+  font-size: 16px;
 }
 
 .btn.btn-signin {
-    background-color: #6f5499;
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#563d7c), to(#6f5499));
-    background-image: -webkit-linear-gradient(top, #563d7c 0%, #6f5499 100%);
-    background-image:      -o-linear-gradient(top, #563d7c 0%, #6f5499 100%);
-    background-image:         linear-gradient(to bottom, #563d7c 0%, #6f5499 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#563d7c', endColorstr='#6F5499', GradientType=0);
-    background-repeat: repeat-x;
-    padding: 0px;
-    font-weight: 700;
-    font-size: 14px;
-    height: 36px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-    border: none;
-    -o-transition: all 0.218s;
-    -moz-transition: all 0.218s;
-    -webkit-transition: all 0.218s;
-    transition: all 0.218s;
+  background-color: #6f5499;
+  #gradient > .vertical(#563d7c; #6f5499; 0%; 100%);
+  padding: 0px;
+  font-weight: 700;
+  font-size: 14px;
+  height: 36px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  border: none;
+  -o-transition: all 0.218s;
+  -moz-transition: all 0.218s;
+  -webkit-transition: all 0.218s;
+  transition: all 0.218s;
 }
 
 .forgot-password {
-    color: rgb(104, 145, 162);
+  color: rgb(104, 145, 162);
 }

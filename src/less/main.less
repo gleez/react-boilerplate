@@ -6,6 +6,8 @@
 @keystone-blue:           #1385e5;
 @elemental-turquoise:     #31adb8;
 
+@sticky-footer-height: 60px;
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
@@ -14,7 +16,7 @@ html {
 }
 body {
   /* Margin bottom by footer height */
-  margin-bottom: 60px;
+  margin-bottom: @sticky-footer-height;
   background-color: #fdfdfd;
 }
 .footer {
@@ -22,7 +24,7 @@ body {
   bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
-  height: 60px;
+  height: @sticky-footer-height;
   background-color: #f5f5f5;
 }
 
@@ -32,7 +34,7 @@ body {
 /* Not required for template or sticky footer method. */
 
 body > .container, body > #example > div > div > .container {
-  padding: 60px 15px 0;
+  padding: @sticky-footer-height 15px 0;
 }
 .container .text-muted {
   margin: 20px 0;
@@ -41,16 +43,6 @@ body > .container, body > #example > div > div > .container {
 .footer > .container {
   padding-right: 15px;
   padding-left: 15px;
-}
-
-.btn-custom{
-  background:#00b09c;
-  border-color:#00b09c;
-  color:#fff;
-}
-.btn-custom:hover{
-  background:#00a491;
-  color:#fff;
 }
 
 .bamf {
@@ -68,8 +60,6 @@ body > .container, body > #example > div > div > .container {
 .input-lg ~ .fa.form-control-feedback {
   line-height: 46px; /* @input-height-base; */
 }
-
-
 
 /*
  * Main navigation
