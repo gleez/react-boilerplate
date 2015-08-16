@@ -34,7 +34,7 @@ export default AuthenticatedComponent( class Header extends React.Component {
 
   render() {
     return (
-      <nav className="navbar navbar-default bs-docs-nav navbar-fixed-top">
+      <nav className="navbar navbar-default rs-nav navbar-fixed-top">
         <div className="container">
           <div className="navbar-header">
             <button
