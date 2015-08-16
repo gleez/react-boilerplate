@@ -20,7 +20,7 @@ export default class Register extends React.Component {
   }
 
   componentDidMount () {
-    document.title = "Signup | My App"
+    document.title = "Signup | React • Starter Kit"
   }
 
   componentWillMount() {

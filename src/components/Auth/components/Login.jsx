@@ -23,7 +23,7 @@ export default class Login extends React.Component {
   }
 
   componentDidMount () {
-    document.title = "Login | My App"
+    document.title = "Login | React • Starter Kit"
   }
 
   componentWillMount() {

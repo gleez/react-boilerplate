@@ -1,12 +1,6 @@
 @import 'bootstrap.less';
 @import "../../node_modules/font-awesome/less/font-awesome.less";
-
-@react-blue:              #00d8ff;
-@ios-blue:                #007aff;
-@keystone-blue:           #1385e5;
-@elemental-turquoise:     #31adb8;
-
-@sticky-footer-height: 60px;
+@import 'Include.less';
 
 /* Sticky footer styles
 -------------------------------------------------- */
@@ -33,7 +27,7 @@ body {
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
 
-body > .container, body > #example > div > div > .container {
+body > .container, body > #root > div > div > .container {
   padding: @sticky-footer-height 15px 0;
 }
 .container .text-muted {
@@ -98,37 +92,6 @@ body > .container, body > #example > div > div > .container {
   border-color: #f9f9f9;
 }
 
-/* Bootstrap "B" icon */
-.bs-docs-booticon {
-  display: block;
-  font-weight: 500;
-  color: #fff;
-  text-align: center;
-  cursor: default;
-  background-color: #563d7c;
-  border-radius: 15%;
-}
-.bs-docs-booticon-sm {
-  width: 30px;
-  height: 30px;
-  font-size: 20px;
-  line-height: 28px;
-}
-.bs-docs-booticon-lg {
-  width: 144px;
-  height: 144px;
-  font-size: 108px;
-  line-height: 140px;
-}
-.bs-docs-booticon-inverse {
-  color: #563d7c;
-  background-color: #fff;
-}
-.bs-docs-booticon-outline {
-  background-color: transparent;
-  border: 1px solid #cdbfe3;
-}
-
 /*
  * Page headers
  *
@@ -136,39 +99,39 @@ body > .container, body > #example > div > div > .container {
  */
 
 /* Page headers */
-.bs-docs-header {
+.rs-header {
   margin-bottom: 40px;
   font-size: 20px;
 }
-.bs-docs-header h1 {
+.rs-header h1 {
   margin-top: 0;
   color: #fff;
 }
-.bs-docs-header p {
+.rs-header p {
   margin-bottom: 0;
   font-weight: 300;
   line-height: 1.4;
 }
-.bs-docs-header .container {
+.rs-header .container {
   position: relative;
 }
 
 @media (min-width: 768px) {
-  .bs-docs-header {
+  .rs-header {
     padding-top: 60px;
     padding-bottom: 60px;
     font-size: 24px;
     text-align: left;
   }
-  .bs-docs-header h1 {
+  .rs-header h1 {
     font-size: 60px;
     line-height: 1;
   }
 }
 
 @media (min-width: 992px) {
-  .bs-docs-header h1,
-  .bs-docs-header p {
+  .rs-header h1,
+  .rs-header p {
     margin-right: 380px;
   }
 }

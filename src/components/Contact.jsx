@@ -17,7 +17,7 @@ export default class Contact extends React.Component {
   }
 
   componentDidMount () {
-    document.title = "Contact | My App"
+    document.title = "Contact | React • Starter Kit"
   }
 
   enableButton() {

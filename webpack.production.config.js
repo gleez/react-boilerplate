@@ -28,7 +28,7 @@ module.exports = {
     new webpack.NoErrorsPlugin(),
     new webpack.optimize.CommonsChunkPlugin('app', null, Infinity),
     new ExtractTextPlugin("[name].[hash].css", {allChunks: true}),
-    new HtmlWebpackPlugin({title: "My App", filename: '../index.html', template: 'index.tmpl'})
+    new HtmlWebpackPlugin({title: "React • Starter Kit", filename: '../index.html', template: 'index.tmpl'})
   ],
   resolve: {
     extensions: ['', '.js', '.jsx', '.less', '.css']

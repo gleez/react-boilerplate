@@ -24,4 +24,4 @@ ReactDOM.render((
     history={history}
     createElement={AsyncProps.createElement}
   />
-), document.getElementById('example'))
+), document.getElementById('root'))

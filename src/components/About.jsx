@@ -5,7 +5,7 @@ import '../less/main'
 
 export default class About extends Component {
   componentDidMount () {
-    document.title = "About | My App"
+    document.title = "About | React • Starter Kit"
   }
 
   render() {

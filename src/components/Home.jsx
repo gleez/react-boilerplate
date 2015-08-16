@@ -6,23 +6,23 @@ import '../less/Home'
 
 export default class Home extends Component {
   componentDidMount () {
-    document.title = "My App"
+    document.title = "React • Starter Kit"
   }
 
   render() {
     return (
       <div>
         <Header/>
-        <main className="bs-docs-masthead" id="content" role="main" tabIndex="-1">
+        <main className="rs-masthead" id="content" role="main" tabIndex="-1">
           <div className="container">
-            <span className="bs-docs-booticon bs-docs-booticon-lg bs-docs-booticon-outline"><i className="fa fa-rocket"></i></span>
+            <span className="rs-booticon rs-booticon-lg rs-booticon-outline"><i className="fa fa-rocket"></i></span>
             <p className="lead">A starter kit for React.js Websites and Apps</p>
             <p>Your starting point for building great multi-device web experiences</p>
           </div>
         </main>
 
         <div className="container">
-          <div className="bs-features">
+          <div className="rs-features">
       			<div className="row">
       				<div className="col-md-4">
       					<span className="fa-stack fa-3x">
