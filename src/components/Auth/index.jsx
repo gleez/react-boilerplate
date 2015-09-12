@@ -1,7 +1,7 @@
 const AuthRoute = {
   path: 'auth',
 
-  getComponents (cb) {
+  getComponent (location, cb) {
     require.ensure([], (require) => {
       cb(null, require('./components/Login'))
     })
@@ -11,7 +11,7 @@ const AuthRoute = {
 const LoginRoute = {
   path: 'auth/login',
 
-  getComponents (cb) {
+  getComponent (location, cb) {
     require.ensure([], (require) => {
       cb(null, require('./components/Login'))
     })
@@ -21,7 +21,7 @@ const LoginRoute = {
 const RegisterRoute = {
   path: 'auth/register',
 
-  getComponents (cb) {
+  getComponent (location, cb) {
     require.ensure([], (require) => {
       cb(null, require('./components/Register'))
     })

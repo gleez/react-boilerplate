@@ -1,7 +1,7 @@
 module.exports = {
   path: 'admin',
 
-  getComponents (cb) {
+  getComponent (location, cb) {
     require.ensure([], (require) => {
       cb(null, require('./components/Admin'))
     })
